@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <OutputPath>bin\</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\**" />
+    <Compile Remove="Logs\**" />
+    <EmbeddedResource Remove="Controllers\**" />
+    <EmbeddedResource Remove="Logs\**" />
+    <None Remove="Controllers\**" />
+    <None Remove="Logs\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DotFramework.Core" Version="3.0.2" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.WebHost" Version="5.2.7" />
+    <PackageReference Include="Microsoft.Owin" version="4.0.0" />
+    <PackageReference Include="Owin" version="1.0" />
+    <PackageReference Include="Newtonsoft.Json" version="12.*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Src\Infra.BusinessRules\Infra.BusinessRules.csproj" />
+    <ProjectReference Include="..\..\Src\Infra.ExceptionHandling\Infra.ExceptionHandling.csproj" />
+    <ProjectReference Include="..\..\Src\Infra.Logging\Infra.Logging.csproj" />
+    <ProjectReference Include="..\..\Src\Infra.ServiceFactory\Infra.ServiceFactory.csproj" />
+    <ProjectReference Include="..\..\Src\Infra.Web.API.Auth\Infra.Web.API.Auth.csproj" />
+
+    <Reference Include="System.Web" />
+    <Reference Include="System.Configuration" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,50 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\..\package.props" />
+
+  <PropertyGroup>
+    <TargetFrameworks>net48</TargetFrameworks>
+
+    <AssemblyVersion>$(MajorVersion).0.0.0</AssemblyVersion>
+    <FileVersion>$(Version)</FileVersion>
+
+    <AssemblyName>$(FullProjectName).Web.API.Auth</AssemblyName>
+    <RootNamespace>$(FullProjectName).Web.API.Auth</RootNamespace>
+    <AssemblyTitle>$(FullProjectName).Web.API.Auth</AssemblyTitle>
+
+    <PackageId>$(PrePackageName).$(ProjectName).Web.API.Auth</PackageId>
+    <Title>$(FullProjectName).Web.API.Auth</Title>
+    <Description>$(FullProjectName).Web.API.Auth</Description>
+    <Summary>$(FullProjectName).Web.API.Auth</Summary>
+    <PackageTags>$(FullProjectName).Web.API.Auth</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Infra.Security\Infra.Security.csproj" />
+    <ProjectReference Include="..\Infra.Web.API\Infra.Web.API.csproj" />
+    <ProjectReference Include="..\Infra.Web.API.Auth.Base\Infra.Web.API.Auth.Base.csproj" />
+    <ProjectReference Include="..\Infra.Web\Infra.Web.csproj" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$(TargetFramework.StartsWith('netstandard')) OR $(TargetFramework.StartsWith('netcoreapp'))">
+    
+  </ItemGroup>
+
+  <ItemGroup Condition="!$(TargetFramework.StartsWith('netstandard')) AND !$(TargetFramework.StartsWith('netcoreapp'))">
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
+
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.*" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.*" />
+    <PackageReference Include="Owin" Version="1.*" />
+    <PackageReference Include="Microsoft.Owin" Version="4.*" />
+    <PackageReference Include="Microsoft.Owin.Host.SystemWeb" Version="4.*" />
+    <PackageReference Include="Microsoft.Owin.Security" Version="4.*" />
+    <PackageReference Include="Microsoft.Owin.Security.OAuth" Version="4.*" />
+
+  </ItemGroup>
+
+</Project>

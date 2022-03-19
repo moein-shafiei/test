@@ -1,0 +1,22 @@
+<Project>
+  <PropertyGroup>
+    <MajorVersion>1</MajorVersion>
+    <MinorVersion>2</MinorVersion>
+    <ReleaseVersion>0</ReleaseVersion>
+    <Revision>0</Revision>
+	  <PackageSemanticVersion></PackageSemanticVersion>
+    <PackageSemanticVersionLabel></PackageSemanticVersionLabel>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(PackageSemanticVersionLabel)' == ''">
+    <PackageSemanticVersionSuffix></PackageSemanticVersionSuffix>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(PackageSemanticVersionLabel)' != '' AND '$(PackageSemanticVersion)' == ''">
+    <PackageSemanticVersionSuffix>-$(PackageSemanticVersionLabel)</PackageSemanticVersionSuffix>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(PackageSemanticVersionLabel)' != '' AND '$(PackageSemanticVersion)' != ''">
+    <PackageSemanticVersionSuffix>-$(PackageSemanticVersionLabel).$(PackageSemanticVersion)</PackageSemanticVersionSuffix>
+  </PropertyGroup>
+</Project>

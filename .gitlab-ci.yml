@@ -1,0 +1,97 @@
+stages:
+   - build
+   - deploy
+   - cleanup
+
+before_script:
+  - '$env:project_name = (git rev-parse --show-toplevel).Split("/") | Select-Object -Last 1'
+
+  - '$gitversion = ConvertFrom-Json (gitversion | out-string)'
+  - '$env:major_version = $gitversion.Major'
+  - '$env:minor_version = $gitversion.Minor'
+  - '$env:release_version = $gitversion.Patch'
+  - '$env:revision = If ($gitversion.BuildMetaData -eq "") { "1" } Else { $gitversion.BuildMetaData }'
+  - '$env:package_semantic_version_label = $gitversion.PreReleaseLabel'
+  - '$env:package_semantic_version = $gitversion.BuildMetaData'
+  - '$env:package_semantic_version_suffix = If ($env:package_semantic_version_label -eq "") { "" } Else { "-$env:package_semantic_version_label.$env:revision" }'
+  - '$env:version = "$env:major_version.$env:minor_version.$env:release_version.$env:revision"'
+
+  - '$env:version_file_path = ".\version.props"'
+
+  - '$xMajorVersion = Select-Xml -Path $env:version_file_path -XPath "/Project/PropertyGroup/MajorVersion"'
+  - '$xMajorVersion.Node.InnerText = $env:major_version'
+  - '$xMajorVersion.Node.OwnerDocument.Save($xMajorVersion.Path)'
+
+  - '$xMinorVersion = Select-Xml -Path $env:version_file_path -XPath "/Project/PropertyGroup/MinorVersion"'
+  - '$xMinorVersion.Node.InnerText = $env:minor_version'
+  - '$xMinorVersion.Node.OwnerDocument.Save($xMinorVersion.Path)'
+
+  - '$xReleaseVersion = Select-Xml -Path $env:version_file_path -XPath "/Project/PropertyGroup/ReleaseVersion"'
+  - '$xReleaseVersion.Node.InnerText = $env:release_version'
+  - '$xReleaseVersion.Node.OwnerDocument.Save($xReleaseVersion.Path)'
+
+  - '$xRevision = Select-Xml -Path $env:version_file_path -XPath "/Project/PropertyGroup/Revision"'
+  - '$xRevision.Node.InnerText = $env:revision'
+  - '$xRevision.Node.OwnerDocument.Save($xRevision.Path)'
+
+  - '$xPackageSemanticVersion = Select-Xml -Path $env:version_file_path -XPath "/Project/PropertyGroup/PackageSemanticVersion"'
+  - '$xPackageSemanticVersion.Node.InnerText = $env:package_semantic_version'
+  - '$xPackageSemanticVersion.Node.OwnerDocument.Save($xPackageSemanticVersion.Path)'
+
+  - '$xPackageSemanticVersionLabel = Select-Xml -Path $env:version_file_path -XPath "/Project/PropertyGroup/PackageSemanticVersionLabel"'
+  - '$xPackageSemanticVersionLabel.Node.InnerText = $env:package_semantic_version_label'
+  - '$xPackageSemanticVersionLabel.Node.OwnerDocument.Save($xPackageSemanticVersionLabel.Path)'
+
+  - 'Write-Output "Project: $env:project_name"'
+  - 'Write-Output "Version: $env:version"'
+
+build:
+  stage: build
+  script:
+    - 'dotnet nuget locals --clear all'
+    - 'dotnet msbuild "source" /p:Configuration=Release /p:CI=True /t:build /restore'
+  artifacts:
+    paths:
+    - bin/Release/
+  except:
+    - master
+    - /^v(\d+\.)?(\d+\.)?(\*|\d+)$/
+    - /hotfix/.*$/
+
+build_staging:
+  stage: build
+  script:
+    - 'dotnet nuget locals --clear all'
+    - 'dotnet msbuild "source" /p:Configuration=Release /p:CI=True /t:build /restore'
+  only:
+    - master
+
+build_stable:
+  stage: build
+  script:
+    - 'dotnet nuget locals --clear all'
+    - 'dotnet msbuild "source" /p:Configuration=Release /p:CI=True /t:build /restore'
+  artifacts:
+    paths:
+      - bin/Release/*.nupkg
+      - bin/Release/*.snupkg
+  only:
+    - /^v(\d+\.)?(\d+\.)?(\*|\d+)$/
+    - /hotfix/.*$/
+
+deploy_nuget:
+  stage: deploy
+  script:
+    - 'dotnet nuget push .\bin\Release\*.nupkg -k $env:DOTFRAMEWORK_NUGET_API_KEY -s https://api.nuget.org/v3/index.json'
+  only:
+    - /^v(\d+\.)?(\d+\.)?(\*|\d+)$/
+    - /hotfix/.*$/
+
+cleanup:
+  stage: cleanup
+  script:
+    - 'Remove-Item "bin" -Recurse -Force -ErrorAction Ignore'
+  when: always
+  only:
+    - /^v(\d+\.)?(\d+\.)?(\*|\d+)$/
+    - /hotfix/.*$/

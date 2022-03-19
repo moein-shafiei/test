@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\..\package.props" />
+
+  <PropertyGroup>
+    <TargetFrameworks>net48;netcoreapp3.1</TargetFrameworks>
+
+    <AssemblyVersion>$(MajorVersion).0.0.0</AssemblyVersion>
+    <FileVersion>$(Version)</FileVersion>
+
+    <AssemblyName>$(FullProjectName).Model</AssemblyName>
+    <RootNamespace>$(FullProjectName).Model</RootNamespace>
+    <AssemblyTitle>$(FullProjectName).Model</AssemblyTitle>
+
+    <PackageId>$(PrePackageName).$(ProjectName).Model</PackageId>
+    <Title>$(FullProjectName).Model</Title>
+    <Description>$(FullProjectName).Model</Description>
+    <Summary>$(FullProjectName).Model</Summary>
+    <PackageTags>$(FullProjectName).Model</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DotFramework.Core" Version="3.*" />
+    <PackageReference Include="DotFramework.Core.Serialization" Version="3.*" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.*" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$(TargetFramework.StartsWith('netstandard')) OR $(TargetFramework.StartsWith('netcoreapp'))">
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.5.*" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.5.*" />
+  </ItemGroup>
+
+  <ItemGroup Condition="!$(TargetFramework.StartsWith('netstandard')) AND !$(TargetFramework.StartsWith('netcoreapp'))">
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+
+</Project>

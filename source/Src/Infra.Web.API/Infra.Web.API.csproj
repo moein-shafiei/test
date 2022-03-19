@@ -1,0 +1,66 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\..\package.props" />
+
+  <PropertyGroup>
+    <TargetFrameworks>net48;netcoreapp3.1</TargetFrameworks>
+
+    <AssemblyVersion>$(MajorVersion).0.0.0</AssemblyVersion>
+    <FileVersion>$(Version)</FileVersion>
+
+    <AssemblyName>$(FullProjectName).Web.API</AssemblyName>
+    <RootNamespace>$(FullProjectName).Web.API</RootNamespace>
+    <AssemblyTitle>$(FullProjectName).Web.API</AssemblyTitle>
+
+    <PackageId>$(PrePackageName).$(ProjectName).Web.API</PackageId>
+    <Title>$(FullProjectName).Web.API</Title>
+    <Description>$(FullProjectName).Web.API</Description>
+    <Summary>$(FullProjectName).Web.API</Summary>
+    <PackageTags>$(FullProjectName).Web.API</PackageTags>
+    <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+    <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Infra.ExceptionHandling\Infra.ExceptionHandling.csproj" />
+
+    <PackageReference Include="DotFramework.Core" Version="3.*" />
+    <PackageReference Include="DotFramework.Core.Web" Version="3.*" />
+
+    <PackageReference Include="Newtonsoft.Json" Version="12.*" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$(TargetFramework.StartsWith('netstandard')) OR $(TargetFramework.StartsWith('netcoreapp'))">
+    <ProjectReference Include="..\Infra.Web.API.Controller\Infra.Web.API.Controller.csproj" />
+
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup Condition="!$(TargetFramework.StartsWith('netstandard')) AND !$(TargetFramework.StartsWith('netcoreapp'))">
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
+
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.*" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.*" />
+    <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.7" />
+    <PackageReference Include="Owin" Version="1.*" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$(TargetFramework.StartsWith('netstandard')) OR $(TargetFramework.StartsWith('netcoreapp'))">
+    <Compile Remove="WebAPIStartup.cs" />
+    <Compile Remove="Attributes/CustomHandleErrorAttribute.cs" />
+    <Compile Remove="ExceptionHandlers/ApiExceptionHandler.cs" />
+    <Compile Remove="Providers\HttpContextProvider.cs" />
+    <Compile Remove="Extensions\HttpContextExtensions.cs" />
+  </ItemGroup>
+
+  <ItemGroup Condition="!$(TargetFramework.StartsWith('netstandard')) AND !$(TargetFramework.StartsWith('netcoreapp'))">
+    <Compile Remove="WebAPIStartupNetCore.cs" />
+    <Compile Remove="ExceptionHandlers\ApiExceptionHandlerNetCore.cs" />
+    <Compile Remove="Providers\HttpContextProviderNetCore.cs" />
+    <Compile Remove="Extensions\HttpContextExtensions.NetCore.cs" />
+    <Compile Remove="Factories\CustomProblemDetailsFactory.cs" />
+    <Compile Remove="Controllers\ErrorController.cs" />
+    <Compile Remove="Filters\ExceptionActionFilter.cs" />
+    <Compile Remove="MiddlewareBase.cs" />
+  </ItemGroup>
+</Project>

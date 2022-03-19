@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\..\package.props" />
+
+  <PropertyGroup>
+    <TargetFrameworks>net48;netcoreapp3.1</TargetFrameworks>
+
+    <AssemblyVersion>$(MajorVersion).0.0.0</AssemblyVersion>
+    <FileVersion>$(Version)</FileVersion>
+
+    <AssemblyName>$(FullProjectName).Messaging.ZeroMq</AssemblyName>
+    <RootNamespace>$(FullProjectName).Messaging.ZeroMq</RootNamespace>
+    <AssemblyTitle>$(FullProjectName).Messaging.ZeroMq</AssemblyTitle>
+
+    <PackageId>$(PrePackageName).$(ProjectName).Messaging.ZeroMq</PackageId>
+    <Title>$(FullProjectName).Messaging.ZeroMq</Title>
+    <Description>$(FullProjectName).Messaging.ZeroMq</Description>
+    <Summary>$(FullProjectName).Messaging.ZeroMq</Summary>
+    <PackageTags>$(FullProjectName).Messaging.ZeroMq</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Infra.Messaging\Infra.Messaging.csproj" />
+    <PackageReference Include="NetMQ" Version="4.*" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$(TargetFramework.StartsWith('netstandard')) OR $(TargetFramework.StartsWith('netcoreapp'))">
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.5.*" />
+  </ItemGroup>
+
+  <ItemGroup Condition="!$(TargetFramework.StartsWith('netstandard')) AND !$(TargetFramework.StartsWith('netcoreapp'))">
+    <Reference Include="System.Configuration" />
+  </ItemGroup>
+
+</Project>

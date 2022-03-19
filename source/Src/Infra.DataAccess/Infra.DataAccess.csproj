@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\..\package.props" />
+
+  <PropertyGroup>
+    <TargetFrameworks>net48;netcoreapp3.1</TargetFrameworks>
+
+    <AssemblyVersion>$(MajorVersion).0.0.0</AssemblyVersion>
+    <FileVersion>$(Version)</FileVersion>
+
+    <AssemblyName>$(FullProjectName).DataAccess</AssemblyName>
+    <RootNamespace>$(FullProjectName).DataAccess</RootNamespace>
+    <AssemblyTitle>$(FullProjectName).DataAccess</AssemblyTitle>
+
+    <PackageId>$(PrePackageName).$(ProjectName).DataAccess</PackageId>
+    <Title>$(FullProjectName).DataAccess</Title>
+    <Description>$(FullProjectName).DataAccess</Description>
+    <Summary>$(FullProjectName).DataAccess</Summary>
+    <PackageTags>$(FullProjectName).DataAccess</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DotFramework.DynamicQuery" Version="3.*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Infra.DataAccessFactory\Infra.DataAccessFactory.csproj" />
+    <ProjectReference Include="..\Infra.ExceptionHandling\Infra.ExceptionHandling.csproj" />
+    <ProjectReference Include="..\Infra.Model\Infra.Model.csproj" />
+
+    <PackageReference Include="DotFramework.Core" Version="3.*" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$(TargetFramework.StartsWith('netstandard')) OR $(TargetFramework.StartsWith('netcoreapp'))">
+
+  </ItemGroup>
+
+  <ItemGroup Condition="!$(TargetFramework.StartsWith('netstandard')) AND !$(TargetFramework.StartsWith('netcoreapp'))">
+
+  </ItemGroup>
+
+</Project>

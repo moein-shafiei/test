@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\..\package.props" />
+  
+  <PropertyGroup>
+    <TargetFrameworks>net48;netcoreapp3.1</TargetFrameworks>
+
+    <AssemblyVersion>$(MajorVersion).0.0.0</AssemblyVersion>
+    <FileVersion>$(Version)</FileVersion>
+
+    <AssemblyName>$(FullProjectName).Messaging.RabbitMq</AssemblyName>
+    <RootNamespace>$(FullProjectName).Messaging.RabbitMq</RootNamespace>
+    <AssemblyTitle>$(FullProjectName).Messaging.RabbitMq</AssemblyTitle>
+
+    <PackageId>$(PrePackageName).$(ProjectName).Messaging.RabbitMq</PackageId>
+    <Title>$(FullProjectName).Messaging.RabbitMq</Title>
+    <Description>$(FullProjectName).Messaging.RabbitMq</Description>
+    <Summary>$(FullProjectName).Messaging.RabbitMq</Summary>
+    <PackageTags>$(FullProjectName).Messaging.RabbitMq</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Infra.Messaging\Infra.Messaging.csproj" />
+    
+	<PackageReference Include="DotFramework.Core" Version="3.*" />
+    <PackageReference Include="RabbitMQ.Client" Version="5.1.*" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$(TargetFramework.StartsWith('netstandard')) OR $(TargetFramework.StartsWith('netcoreapp'))">
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.5.*" />
+  </ItemGroup>
+
+  <ItemGroup Condition="!$(TargetFramework.StartsWith('netstandard')) AND !$(TargetFramework.StartsWith('netcoreapp'))">
+    <Reference Include="System.Configuration" />
+  </ItemGroup>
+
+</Project>

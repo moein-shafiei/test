@@ -1,0 +1,60 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\..\package.props" />
+
+  <PropertyGroup>
+    <TargetFrameworks>net40;net45;net46;net47;netstandard2.0;netcoreapp2.0</TargetFrameworks>
+
+    <AssemblyVersion>$(MajorVersion).0.0.0</AssemblyVersion>
+    <FileVersion>$(Version)</FileVersion>
+
+    <AssemblyName>DotFramework.Infra</AssemblyName>
+    <RootNamespace>DotFramework.Infra</RootNamespace>
+    <AssemblyTitle>DotFramework.Infra</AssemblyTitle>
+
+    <PackageId>DotFramework.Infra</PackageId>
+    <Title>DotFramework.Infra</Title>
+    <Description>DotFramework.Infra</Description>
+    <Summary>DotFramework.Infra</Summary>
+    <PackageTags>DotFramework.Infra</PackageTags>
+
+    <!--<IncludeSource>True</IncludeSource>
+    <IncludeSymbols>True</IncludeSymbols>-->
+  </PropertyGroup>
+
+  <ItemGroup>
+
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0' OR '$(TargetFramework)' == 'netcoreapp2.0'">
+    <PackageReference Include="Microsoft.CSharp" Version="4.4.*" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.4.*" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.*" />
+    <PackageReference Include="Unity.Interception.NetCore" Version="4.0.*" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' != 'netstandard2.0' AND '$(TargetFramework)' != 'netcoreapp2.0'">
+    <Reference Include="System.Configuration" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net45' OR '$(TargetFramework)' == 'net46' OR '$(TargetFramework)' == 'net47'">
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.*" />
+    <PackageReference Include="Unity.Interception" Version="4.0.*" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net40'">
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' != 'netstandard2.0' AND '$(TargetFramework)' != 'netcoreapp2.0'">
+    <Reference Include="System.Configuration" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net40'">
+    <Compile Remove="Providers\FactoryBase.cs" />
+    <Compile Remove="Extensions\TypeExtensions.cs" />
+    <Compile Remove="Extensions\PropertyInfoExtensions.cs" />
+  </ItemGroup>
+
+</Project>

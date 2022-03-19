@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\..\package.props" />
+
+  <PropertyGroup>
+    <TargetFrameworks>net48;netcoreapp3.1</TargetFrameworks>
+
+    <AssemblyVersion>$(MajorVersion).0.0.0</AssemblyVersion>
+    <FileVersion>$(Version)</FileVersion>
+
+    <AssemblyName>$(FullProjectName).BusinessRules</AssemblyName>
+    <RootNamespace>$(FullProjectName).BusinessRules</RootNamespace>
+    <AssemblyTitle>$(FullProjectName).BusinessRules</AssemblyTitle>
+
+    <PackageId>$(PrePackageName).$(ProjectName).BusinessRules</PackageId>
+    <Title>$(FullProjectName).BusinessRules</Title>
+    <Description>$(FullProjectName).BusinessRules</Description>
+    <Summary>$(FullProjectName).BusinessRules</Summary>
+    <PackageTags>$(FullProjectName).BusinessRules</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Infra.DataAccess\Infra.DataAccess.csproj" />
+    <ProjectReference Include="..\Infra.ExceptionHandling\Infra.ExceptionHandling.csproj" />
+    <ProjectReference Include="..\Infra.Model\Infra.Model.csproj" />
+    <ProjectReference Include="..\Infra.Security\Infra.Security.csproj" />
+    
+	<PackageReference Include="DotFramework.Core" Version="3.*" />
+	<PackageReference Include="DotFramework.Core.DependencyInjection" Version="3.*" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$(TargetFramework.StartsWith('netstandard')) OR $(TargetFramework.StartsWith('netcoreapp'))">
+    <PackageReference Include="Microsoft.CSharp" Version="4.5.*" />
+  </ItemGroup>
+
+  <ItemGroup Condition="!$(TargetFramework.StartsWith('netstandard')) AND !$(TargetFramework.StartsWith('netcoreapp'))">
+    <Reference Include="System.Transactions" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+
+</Project>

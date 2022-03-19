@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\..\package.props" />
+
+  <PropertyGroup>
+    <TargetFrameworks>net48;netcoreapp3.1</TargetFrameworks>
+    
+    <AssemblyVersion>$(MajorVersion).0.0.0</AssemblyVersion>
+    <FileVersion>$(Version)</FileVersion>
+
+    <AssemblyName>$(FullProjectName).Request</AssemblyName>
+    <RootNamespace>$(FullProjectName).Request</RootNamespace>
+    <AssemblyTitle>$(FullProjectName).Request</AssemblyTitle>
+
+    <PackageId>$(PrePackageName).$(ProjectName).Request</PackageId>
+    <Title>$(FullProjectName).Request</Title>
+    <Description>$(FullProjectName).Request</Description>
+    <Summary>$(FullProjectName).Request</Summary>
+    <PackageTags>$(FullProjectName).Request</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Infra.ExceptionHandling\Infra.ExceptionHandling.csproj" />
+    
+    <PackageReference Include="DotFramework.Core" Version="3.*" />
+    <PackageReference Include="DotFramework.Core.DependencyInjection" Version="3.*" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$(TargetFramework.StartsWith('netstandard')) OR $(TargetFramework.StartsWith('netcoreapp'))">
+
+  </ItemGroup>
+
+  <ItemGroup Condition="!$(TargetFramework.StartsWith('netstandard')) AND !$(TargetFramework.StartsWith('netcoreapp'))">
+
+  </ItemGroup>
+
+</Project>

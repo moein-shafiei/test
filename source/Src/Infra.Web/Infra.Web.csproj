@@ -1,0 +1,53 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\..\package.props" />
+
+  <PropertyGroup>
+    <TargetFrameworks>net48;netcoreapp3.1</TargetFrameworks>
+
+    <AssemblyVersion>$(MajorVersion).0.0.0</AssemblyVersion>
+    <FileVersion>$(Version)</FileVersion>
+
+    <AssemblyName>$(FullProjectName).Web</AssemblyName>
+    <RootNamespace>$(FullProjectName).Web</RootNamespace>
+    <AssemblyTitle>$(FullProjectName).Web</AssemblyTitle>
+
+    <PackageId>$(PrePackageName).$(ProjectName).Web</PackageId>
+    <Title>$(FullProjectName).Web</Title>
+    <Description>$(FullProjectName).Web</Description>
+    <Summary>$(FullProjectName).Web</Summary>
+    <PackageTags>$(FullProjectName).Web</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Extensions\HttpRequestExtensions.cs" />
+    <Compile Remove="SecureGlobalBase.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Infra.Configuration\Infra.Configuration.csproj" />
+    <ProjectReference Include="..\Infra.ExceptionHandling\Infra.ExceptionHandling.csproj" />
+    <ProjectReference Include="..\Infra.Security\Infra.Security.csproj" />
+
+    <PackageReference Include="DotFramework.Core" Version="3.*" />
+    <PackageReference Include="DotFramework.Core.Configuration" Version="3.*" />
+    <PackageReference Include="DotFramework.Core.Web" Version="3.*" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$(TargetFramework.StartsWith('netstandard')) OR $(TargetFramework.StartsWith('netcoreapp'))">
+    <Compile Remove="GlobalServiceBase.cs" />
+    <Compile Remove="SecureGlobalServiceBase.cs" />
+    <Compile Remove="GlobalBase.cs" />
+  </ItemGroup>
+
+  <ItemGroup Condition="!$(TargetFramework.StartsWith('netstandard')) AND !$(TargetFramework.StartsWith('netcoreapp'))">
+    <Reference Include="System.Web" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Extensions\" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\..\package.props" />
+
+  <PropertyGroup>
+    <TargetFrameworks>net48;netcoreapp3.1</TargetFrameworks>
+
+    <AssemblyVersion>$(MajorVersion).0.0.0</AssemblyVersion>
+    <FileVersion>$(Version)</FileVersion>
+
+    <AssemblyName>$(FullProjectName).DataAccess.SqlServer</AssemblyName>
+    <RootNamespace>$(FullProjectName).DataAccess.SqlServer</RootNamespace>
+    <AssemblyTitle>$(FullProjectName).DataAccess.SqlServer</AssemblyTitle>
+
+    <PackageId>$(PrePackageName).$(ProjectName).DataAccess.SqlServer</PackageId>
+    <Title>$(FullProjectName).DataAccess.SqlServer</Title>
+    <Description>$(FullProjectName).DataAccess.SqlServer</Description>
+    <Summary>$(FullProjectName).DataAccess.SqlServer</Summary>
+    <PackageTags>$(FullProjectName).DataAccess.SqlServer</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Infra.DataAccess\Infra.DataAccess.csproj" />
+
+    <PackageReference Include="DotFramework.Core" Version="3.*" />
+    <PackageReference Include="DotFramework.DynamicQuery.SqlServer" Version="3.*" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$(TargetFramework.StartsWith('netstandard')) OR $(TargetFramework.StartsWith('netcoreapp'))">
+    <PackageReference Include="System.Data.SqlClient" Version="4.6.*" />
+  </ItemGroup>
+
+  <ItemGroup Condition="!$(TargetFramework.StartsWith('netstandard')) AND !$(TargetFramework.StartsWith('netcoreapp'))">
+
+  </ItemGroup>
+
+</Project>

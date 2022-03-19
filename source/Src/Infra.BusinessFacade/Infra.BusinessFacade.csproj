@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\..\package.props" />
+  
+  <PropertyGroup>
+    <TargetFrameworks>net48;netcoreapp3.1</TargetFrameworks>
+
+    <AssemblyVersion>$(MajorVersion).0.0.0</AssemblyVersion>
+    <FileVersion>$(Version)</FileVersion>
+
+    <AssemblyName>$(FullProjectName).BusinessFacade</AssemblyName>
+    <RootNamespace>$(FullProjectName).BusinessFacade</RootNamespace>
+    <AssemblyTitle>$(FullProjectName).BusinessFacade</AssemblyTitle>
+
+    <PackageId>$(PrePackageName).$(ProjectName).BusinessFacade</PackageId>
+    <Title>$(FullProjectName).BusinessFacade</Title>
+    <Description>$(FullProjectName).BusinessFacade</Description>
+    <Summary>$(FullProjectName).BusinessFacade</Summary>
+    <PackageTags>$(FullProjectName).BusinessFacade</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Infra.BusinessRules\Infra.BusinessRules.csproj" />
+    <ProjectReference Include="..\Infra.Model\Infra.Model.csproj" />
+    <ProjectReference Include="..\Infra.ServiceFactory\Infra.ServiceFactory.csproj" />
+    <PackageReference Include="DotFramework.Core" Version="3.*" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$(TargetFramework.StartsWith('netstandard')) OR $(TargetFramework.StartsWith('netcoreapp'))">
+
+  </ItemGroup>
+
+  <ItemGroup Condition="!$(TargetFramework.StartsWith('netstandard')) AND !$(TargetFramework.StartsWith('netcoreapp'))">
+
+  </ItemGroup>
+
+</Project>

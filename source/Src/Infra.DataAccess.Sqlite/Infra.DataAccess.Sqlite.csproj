@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\..\package.props" />
+
+  <PropertyGroup>
+    <TargetFrameworks>net48;netcoreapp3.1</TargetFrameworks>
+
+    <AssemblyVersion>$(MajorVersion).0.0.0</AssemblyVersion>
+    <FileVersion>$(Version)</FileVersion>
+
+    <AssemblyName>$(FullProjectName).DataAccess.Sqlite</AssemblyName>
+    <RootNamespace>$(FullProjectName).DataAccess.Sqlite</RootNamespace>
+    <AssemblyTitle>$(FullProjectName).DataAccess.Sqlite</AssemblyTitle>
+
+    <PackageId>$(PrePackageName).$(ProjectName).DataAccess.Sqlite</PackageId>
+    <Title>$(FullProjectName).DataAccess.Sqlite</Title>
+    <Description>$(FullProjectName).DataAccess.Sqlite</Description>
+    <Summary>$(FullProjectName).DataAccess.Sqlite</Summary>
+    <PackageTags>$(FullProjectName).DataAccess.Sqlite</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Infra.DataAccess\Infra.DataAccess.csproj" />
+
+    <PackageReference Include="DotFramework.Core" Version="3.*" />
+    <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="3.*" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$(TargetFramework.StartsWith('netstandard')) OR $(TargetFramework.StartsWith('netcoreapp'))">
+    
+  </ItemGroup>
+
+  <ItemGroup Condition="!$(TargetFramework.StartsWith('netstandard')) AND !$(TargetFramework.StartsWith('netcoreapp'))">
+    
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\..\package.props" />
+
+  <PropertyGroup>
+    <TargetFrameworks>net48;netcoreapp3.1</TargetFrameworks>
+
+    <AssemblyVersion>$(MajorVersion).0.0.0</AssemblyVersion>
+    <FileVersion>$(Version)</FileVersion>
+
+    <AssemblyName>$(FullProjectName).Caching</AssemblyName>
+    <RootNamespace>$(FullProjectName).Caching</RootNamespace>
+    <AssemblyTitle>$(FullProjectName).Caching</AssemblyTitle>
+
+    <PackageId>$(PrePackageName).$(ProjectName).Caching</PackageId>
+    <Title>$(FullProjectName).Caching</Title>
+    <Description>$(FullProjectName).Caching</Description>
+    <Summary>$(FullProjectName).Caching</Summary>
+    <PackageTags>$(FullProjectName).Caching</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Infra.Configuration\Infra.Configuration.csproj" />
+
+    <PackageReference Include="DotFramework.Core" Version="3.*" />
+    <PackageReference Include="Unity.Container" Version="5.11.*" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$(TargetFramework.StartsWith('netstandard')) OR $(TargetFramework.StartsWith('netcoreapp'))">
+
+  </ItemGroup>
+
+  <ItemGroup Condition="!$(TargetFramework.StartsWith('netstandard')) AND !$(TargetFramework.StartsWith('netcoreapp'))">
+    <Reference Include="System.Configuration" />
+  </ItemGroup>
+
+</Project>

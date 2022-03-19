@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\..\package.props" />
+
+  <PropertyGroup>
+    <TargetFrameworks>net40</TargetFrameworks>
+
+    <AssemblyVersion>$(MajorVersion).0.0.0</AssemblyVersion>
+    <FileVersion>$(Version)</FileVersion>
+
+    <AssemblyName>$(FullProjectName).DataAnnotations</AssemblyName>
+    <RootNamespace>$(FullProjectName).DataAnnotations</RootNamespace>
+    <AssemblyTitle>$(FullProjectName).DataAnnotations</AssemblyTitle>
+
+    <PackageId>$(PrePackageName).$(ProjectName).DataAnnotations</PackageId>
+    <Title>$(FullProjectName).DataAnnotations</Title>
+    <Description>$(FullProjectName).DataAnnotations</Description>
+    <Summary>$(FullProjectName)..DataAnnotations</Summary>
+    <PackageTags>$(FullProjectName).DataAnnotations</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+  </ItemGroup>
+
+</Project>

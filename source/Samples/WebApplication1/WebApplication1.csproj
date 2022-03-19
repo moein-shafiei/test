@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <OutputPath>bin\</OutputPath>
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <Compile Remove="Identity\**" />
+    <Content Remove="Identity\**" />
+    <EmbeddedResource Remove="Identity\**" />
+    <None Remove="Identity\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.2.*" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="2.2.*" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Src\Infra.Request\Infra.Request.csproj" />
+    <ProjectReference Include="..\..\Src\Infra.ExceptionHandling\Infra.ExceptionHandling.csproj" />
+    <ProjectReference Include="..\..\Src\Infra.Logging\Infra.Logging.csproj" />
+
+    <ProjectReference Include="..\..\Src\Infra.Web.API\Infra.Web.API.csproj" />
+    <ProjectReference Include="..\..\Src\Infra.BusinessFacade\Infra.BusinessFacade.csproj" />
+    
+    <ProjectReference Include="..\..\Src\Infra.Web.API.AuthNetCore\Infra.Web.API.AuthNetCore.csproj" />
+  </ItemGroup>
+
+</Project>

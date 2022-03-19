@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\..\package.props" />
+
+  <PropertyGroup>
+    <TargetFrameworks>net48;netcoreapp3.1</TargetFrameworks>
+
+    <AssemblyVersion>$(MajorVersion).0.0.0</AssemblyVersion>
+    <FileVersion>$(Version)</FileVersion>
+
+    <AssemblyName>$(FullProjectName).Web.API.Invoker</AssemblyName>
+    <RootNamespace>$(FullProjectName).Web.API.Invoker</RootNamespace>
+    <AssemblyTitle>$(FullProjectName).Web.API.Invoker</AssemblyTitle>
+
+    <PackageId>$(PrePackageName).$(ProjectName).Web.API.Invoker</PackageId>
+    <Title>$(FullProjectName).Web.API.Invoker</Title>
+    <Description>$(FullProjectName).Web.API.Invoker</Description>
+    <Summary>$(FullProjectName).Web.API.Invoker</Summary>
+    <PackageTags>$(FullProjectName).Web.API.Invoker</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Infra.ServiceFactory\Infra.ServiceFactory.csproj" />
+
+    <PackageReference Include="DotFramework.DynamicQuery" Version="3.*" />
+    <PackageReference Include="DotFramework.Core" Version="3.*" />
+    <PackageReference Include="DotFramework.Core.Web" Version="3.*" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$(TargetFramework.StartsWith('netstandard')) OR $(TargetFramework.StartsWith('netcoreapp'))">
+
+  </ItemGroup>
+
+  <ItemGroup Condition="!$(TargetFramework.StartsWith('netstandard')) AND !$(TargetFramework.StartsWith('netcoreapp'))">
+
+  </ItemGroup>
+
+</Project>

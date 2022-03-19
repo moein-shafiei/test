@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\..\package.props" />
+
+  <PropertyGroup>
+    <TargetFrameworks>netcoreapp3.1</TargetFrameworks>
+
+    <AssemblyVersion>$(MajorVersion).0.0.0</AssemblyVersion>
+    <FileVersion>$(Version)</FileVersion>
+
+    <AssemblyName>$(FullProjectName).Web.API.AuthNetCore</AssemblyName>
+    <RootNamespace>$(FullProjectName).Web.API.AuthNetCore</RootNamespace>
+    <AssemblyTitle>$(FullProjectName).Web.API.Auth</AssemblyTitle>
+
+    <PackageId>$(PrePackageName).$(ProjectName).Web.API.AuthNetCore</PackageId>
+    <Title>$(FullProjectName).Web.API.AuthNetCore</Title>
+    <Description>$(FullProjectName).Web.API.AuthNetCore</Description>
+    <Summary>$(FullProjectName).Web.API.AuthNetCore</Summary>
+    <PackageTags>$(FullProjectName).Web.API.AuthNetCore</PackageTags>
+    <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+    <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.*" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Abstractions" Version="2.*" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.*" />
+    <PackageReference Include="System.Text.Json" Version="4.6.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Infra.Web.API.Auth.Base\Infra.Web.API.Auth.Base.csproj" />
+  </ItemGroup>
+
+</Project>

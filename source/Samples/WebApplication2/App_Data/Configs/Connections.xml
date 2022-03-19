@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<connectionConfigSection>
+  <connections>
+    <connection name="fileRepositoryConnection" dbType="Sql" connectionString="Data Source=.;Initial Catalog=IPP.FileRepository;User Id=IPPUser;Password=IPP$2015;MultipleActiveResultSets=True;" isEncrypted="false" />
+    <connection name="generalConnection" dbType="Sql" connectionString="Data Source=.;Initial Catalog=IPP.General;User Id=IPPUser;Password=IPP$2015;MultipleActiveResultSets=True;" isEncrypted="false" />
+    <connection name="guesSportConnection" dbType="Sql" connectionString="Data Source=.;Initial Catalog=IPP.GuesSport;User Id=IPPUser;Password=IPP$2015;MultipleActiveResultSets=True;" isEncrypted="false" />
+  </connections>
+</connectionConfigSection>
